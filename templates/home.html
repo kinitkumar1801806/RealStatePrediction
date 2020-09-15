@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Banglore Home Price Prediction</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src='{% static "jssfiles/app.js" %}'></script>
+	<link rel="stylesheet" href='{%static "cssfiles/app.css" %}'>
+</head>
+<style>
+	@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+.switch-field {
+	display: flex;
+	margin-bottom: 36px;
+	overflow: hidden;
+}
+
+.switch-field input {
+	position: absolute !important;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	width: 1px;
+	border: 0;
+	overflow: hidden;
+}
+
+.switch-field label {
+	background-color: #e4e4e4;
+	color: rgba(0, 0, 0, 0.6);
+	font-size: 14px;
+	line-height: 1;
+	text-align: center;
+	padding: 8px 16px;
+	margin-right: -1px;
+	border: 1px solid rgba(0, 0, 0, 0.2);
+	box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
+	transition: all 0.1s ease-in-out;
+}
+
+.switch-field label:hover {
+	cursor: pointer;
+}
+
+.switch-field input:checked + label {
+	background-color: #a5dc86;
+	box-shadow: none;
+}
+
+.switch-field label:first-of-type {
+	border-radius: 4px 0 0 4px;
+}
+
+.switch-field label:last-of-type {
+	border-radius: 0 4px 4px 0;
+}
+
+.form {
+	max-width: 270px;
+	font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
+	font-weight: normal;
+	line-height: 1.625;
+	margin: 8px auto;
+	padding-left: 16px;
+	z-index: 2;
+}
+
+h2 {
+	font-size: 18px;
+	margin-bottom: 8px;
+}
+.area{
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 76%;
+  border: 0;
+  margin: 0 0 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 15px;
+  height: 35px;
+  border-radius: 5px;
+}
+
+.location{
+  font-family: "Roboto", sans-serif;
+  outline: 0;
+  background: #f2f2f2;
+  width: 76%;
+  border: 0;
+  margin: 0 0 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  font-size: 15px;
+  height: 40px;
+  border-radius: 5px;
+}
+
+.submit{
+  background: #a5dc86;
+  width: 100%;
+  border: 0;
+  margin: 25px 0 10px;
+  box-sizing: border-box;
+  font-size: 15px;
+	height: 35px;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.result{
+		background: #dcd686;
+		width: 100%;
+		border: 0;
+		margin: 25px 0 10px;
+		box-sizing: border-box;
+		font-size: 15px;
+		height: 35px;
+		text-align: center;
+}
+
+.img {
+  background: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+	background-repeat: no-repeat;
+  background-size: auto;
+  background-size:100% 100%;
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+  filter: blur(15px);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+body, html {
+  height: 100%;
+}
+</style>
+<body>
+<div class="img" ></div>
+<form class="form">
+	<h2>Area (Square Feet)</h2>
+    <input class="area"  type="email" id="uiSqft" class="floatLabel" name="Squareft" value="1000">
+	<h2>BHK</h2>
+	<div class="switch-field">
+		<input type="radio" id="radio-bhk-1" name="uiBHK" value="1"/>
+		<label for="radio-bhk-1">1</label>
+		<input type="radio" id="radio-bhk-2" name="uiBHK" value="2" checked/>
+		<label for="radio-bhk-2">2</label>
+		<input type="radio" id="radio-bhk-3" name="uiBHK" value="3"/>
+		<label for="radio-bhk-3">3</label>
+		<input type="radio" id="radio-bhk-4" name="uiBHK" value="4"/>
+		<label for="radio-bhk-4">4</label>
+		<input type="radio" id="radio-bhk-5" name="uiBHK" value="5"/>
+		<label for="radio-bhk-5">5</label>
+	</div>
+	</form>
+<form class="form">
+	<h2>Bath</h2>
+	<div class="switch-field">
+		<input type="radio" id="radio-bath-1" name="uiBathrooms" value="1"/>
+		<label for="radio-bath-1">1</label>
+		<input type="radio" id="radio-bath-2" name="uiBathrooms" value="2" checked/>
+		<label for="radio-bath-2">2</label>
+		<input type="radio" id="radio-bath-3" name="uiBathrooms" value="3"/>
+		<label for="radio-bath-3">3</label>
+		<input type="radio" id="radio-bath-4" name="uiBathrooms" value="4"/>
+		<label for="radio-bath-4">4</label>
+		<input type="radio" id="radio-bath-5" name="uiBathrooms" value="5"/>
+		<label for="radio-bath-5">5</label>
+	</div>
+		<h2>Location</h2>
+	<div>
+  <select class="location" name="" id="uiLocations">
+    <option value="" disabled="disabled" selected="selected">Choose a Location</option>
+		<option> 1st block jayanagar </option>
+<option> 1st phase jp nagar </option>
+<option> 2nd phase judicial layout </option>
+<option> 2nd stage nagarbhavi </option>
+<option> 5th block hbr layout </option>
+<option> 5th phase jp nagar </option>
+<option> 6th phase jp nagar </option>
+<option> 7th phase jp nagar </option>
+<option> 8th phase jp nagar </option>
+<option> 9th phase jp nagar </option>
+<option> aecs layout </option>
+<option> abbigere </option>
+<option> akshaya nagar </option>
+<option> ambalipura </option>
+<option> ambedkar nagar </option>
+<option> amruthahalli </option>
+<option> anandapura </option>
+<option> ananth nagar </option>
+<option> anekal </option>
+<option> anjanapura </option>
+<option> ardendale </option>
+<option> arekere </option>
+<option> attibele </option>
+<option> beml layout </option>
+<option> btm 2nd stage </option>
+<option> btm layout </option>
+<option> babusapalaya </option>
+<option> badavala nagar </option>
+<option> balagere </option>
+<option> banashankari </option>
+<option> banashankari stage ii </option>
+<option> banashankari stage iii </option>
+<option> banashankari stage v </option>
+<option> banashankari stage vi </option>
+<option> banaswadi </option>
+<option> banjara layout </option>
+<option> bannerghatta </option>
+<option> bannerghatta road </option>
+<option> basavangudi </option>
+<option> basaveshwara nagar </option>
+<option> battarahalli </option>
+<option> begur </option>
+<option> begur road </option>
+<option> bellandur </option>
+<option> benson town </option>
+<option> bharathi nagar </option>
+<option> bhoganhalli </option>
+<option> billekahalli </option>
+<option> binny pete </option>
+<option> bisuvanahalli </option>
+<option> bommanahalli </option>
+<option> bommasandra </option>
+<option> bommasandra industrial area </option>
+<option> bommenahalli </option>
+<option> brookefield </option>
+<option> budigere </option>
+<option> cv raman nagar </option>
+<option> chamrajpet </option>
+<option> chandapura </option>
+<option> channasandra </option>
+<option> chikka tirupathi </option>
+<option> chikkabanavar </option>
+<option> chikkalasandra </option>
+<option> choodasandra </option>
+<option> cooke town </option>
+<option> cox town </option>
+<option> cunningham road </option>
+<option> dasanapura </option>
+<option> dasarahalli </option>
+<option> devanahalli </option>
+<option> devarachikkanahalli </option>
+<option> dodda nekkundi </option>
+<option> doddaballapur </option>
+<option> doddakallasandra </option>
+<option> doddathoguru </option>
+<option> domlur </option>
+<option> dommasandra </option>
+<option> epip zone </option>
+<option> electronic city </option>
+<option> electronic city phase ii </option>
+<option> electronics city phase 1 </option>
+<option> frazer town </option>
+<option> gm palaya </option>
+<option> garudachar palya </option>
+<option> giri nagar </option>
+<option> gollarapalya hosahalli </option>
+<option> gottigere </option>
+<option> green glen layout </option>
+<option> gubbalala </option>
+<option> gunjur </option>
+<option> hal 2nd stage </option>
+<option> hbr layout </option>
+<option> hrbr layout </option>
+<option> hsr layout </option>
+<option> haralur road </option>
+<option> harlur </option>
+<option> hebbal </option>
+<option> hebbal kempapura </option>
+<option> hegde nagar </option>
+<option> hennur </option>
+<option> hennur road </option>
+<option> hoodi </option>
+<option> horamavu agara </option>
+<option> horamavu banaswadi </option>
+<option> hormavu </option>
+<option> hosa road </option>
+<option> hosakerehalli </option>
+<option> hoskote </option>
+<option> hosur road </option>
+<option> hulimavu </option>
+<option> isro layout </option>
+<option> itpl </option>
+<option> iblur village </option>
+<option> indira nagar </option>
+<option> jp nagar </option>
+<option> jakkur </option>
+<option> jalahalli </option>
+<option> jalahalli east </option>
+<option> jigani </option>
+<option> judicial layout </option>
+<option> kr puram </option>
+<option> kadubeesanahalli </option>
+<option> kadugodi </option>
+<option> kaggadasapura </option>
+<option> kaggalipura </option>
+<option> kaikondrahalli </option>
+<option> kalena agrahara </option>
+<option> kalyan nagar </option>
+<option> kambipura </option>
+<option> kammanahalli </option>
+<option> kammasandra </option>
+<option> kanakapura </option>
+<option> kanakpura road </option>
+<option> kannamangala </option>
+<option> karuna nagar </option>
+<option> kasavanhalli </option>
+<option> kasturi nagar </option>
+<option> kathriguppe </option>
+<option> kaval byrasandra </option>
+<option> kenchenahalli </option>
+<option> kengeri </option>
+<option> kengeri satellite town </option>
+<option> kereguddadahalli </option>
+<option> kodichikkanahalli </option>
+<option> kodigehaali </option>
+<option> kodigehalli </option>
+<option> kodihalli </option>
+<option> kogilu </option>
+<option> konanakunte </option>
+<option> koramangala </option>
+<option> kothannur </option>
+<option> kothanur </option>
+<option> kudlu </option>
+<option> kudlu gate </option>
+<option> kumaraswami layout </option>
+<option> kundalahalli </option>
+<option> lb shastri nagar </option>
+<option> laggere </option>
+<option> lakshminarayana pura </option>
+<option> lingadheeranahalli </option>
+<option> magadi road </option>
+<option> mahadevpura </option>
+<option> mahalakshmi layout </option>
+<option> mallasandra </option>
+<option> malleshpalya </option>
+<option> malleshwaram </option>
+<option> marathahalli </option>
+<option> margondanahalli </option>
+<option> marsur </option>
+<option> mico layout </option>
+<option> munnekollal </option>
+<option> murugeshpalya </option>
+<option> mysore road </option>
+<option> ngr layout </option>
+<option> nri layout </option>
+<option> nagarbhavi </option>
+<option> nagasandra </option>
+<option> nagavara </option>
+<option> nagavarapalya </option>
+<option> narayanapura </option>
+<option> neeladri nagar </option>
+<option> nehru nagar </option>
+<option> ombr layout </option>
+<option> old airport road </option>
+<option> old madras road </option>
+<option> padmanabhanagar </option>
+<option> pai layout </option>
+<option> panathur </option>
+<option> parappana agrahara </option>
+<option> pattandur agrahara </option>
+<option> poorna pragna layout </option>
+<option> prithvi layout </option>
+<option> r.t. nagar </option>
+<option> rachenahalli </option>
+<option> raja rajeshwari nagar </option>
+<option> rajaji nagar </option>
+<option> rajiv nagar </option>
+<option> ramagondanahalli </option>
+<option> ramamurthy nagar </option>
+<option> rayasandra </option>
+<option> sahakara nagar </option>
+<option> sanjay nagar </option>
+<option> sarakki nagar </option>
+<option> sarjapur </option>
+<option> sarjapur  road </option>
+<option> sarjapura - attibele road </option>
+<option> sector 2 hsr layout </option>
+<option> sector 7 hsr layout </option>
+<option> seegehalli </option>
+<option> shampura </option>
+<option> shivaji nagar </option>
+<option> singasandra </option>
+<option> somasundara palya </option>
+<option> sompura </option>
+<option> sonnenahalli </option>
+<option> subramanyapura </option>
+<option> sultan palaya </option>
+<option> tc palaya </option>
+<option> talaghattapura </option>
+<option> thanisandra </option>
+<option> thigalarapalya </option>
+<option> thubarahalli </option>
+<option> thyagaraja nagar </option>
+<option> tindlu </option>
+<option> tumkur road </option>
+<option> ulsoor </option>
+<option> uttarahalli </option>
+<option> varthur </option>
+<option> varthur road </option>
+<option> vasanthapura </option>
+<option> vidyaranyapura </option>
+<option> vijayanagar </option>
+<option> vishveshwarya layout </option>
+<option> vishwapriya layout </option>
+<option> vittasandra </option>
+<option> whitefield </option>
+<option> yelachenahalli </option>
+<option> yelahanka </option>
+<option> yelahanka new town </option>
+<option> yelenahalli </option>
+<option> yeshwanthpur </option>
+  </select>
+</div>
+</form>
+	<button class="submit" onclick="onClickedEstimatePrice()" type="button">Estimate Price</button>
+	<div id="uiEstimatedPrice" class="result">	<h2></h2> </div>
+</body>
+</html>
